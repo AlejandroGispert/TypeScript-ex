@@ -24,12 +24,7 @@ export const TaskHeader: FC<ITaskHeader> = (
         <Chip
           label={format(date, 'PPP')}
           variant="outlined"
-          color="error"
-        />
-        <Chip
-          label="22,July,2022"
-          variant="outlined"
-          color="primary"
+          //   color="error"
         />
       </Box>
     </Box>
