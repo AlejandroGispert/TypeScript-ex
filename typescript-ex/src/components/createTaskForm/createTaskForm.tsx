@@ -3,6 +3,10 @@ import { Box, Typography, Stack } from '@mui/material';
 import { TaskDescriptionField } from './_taskDescriptionField';
 import { TaskTitleField } from './_taskTitleField';
 import { TaskDateField } from './_taskDateField';
+import { TaskSelectField } from './_taskSelectField';
+import { Status } from './enums/Status';
+import { Priority } from './enums/Priority';
+import PropTypes from 'prop-types';
 
 export const CreateTaskForm: FC = (): ReactElement => {
   return (
@@ -21,7 +25,54 @@ export const CreateTaskForm: FC = (): ReactElement => {
         <TaskTitleField />
         <TaskDescriptionField />
         <TaskDateField />
+        <Stack direction="row" spacing={2}>
+          <TaskSelectField
+            label="Status"
+            name="status"
+            items={[
+              {
+                value: Status.todo,
+                label: Status.todo.toUpperCase(),
+              },
+              {
+                value: Status.inProgress,
+                label: Status.inProgress.toUpperCase(),
+              },
+            ]}
+          />
+          <TaskSelectField
+            label="Priority"
+            name="priority"
+            items={[
+              {
+                value: Priority.low,
+                label: Priority.low,
+              },
+              {
+                value: Priority.normal,
+                label: Priority.normal,
+              },
+              {
+                value: Priority.high,
+                label: Priority.high,
+              },
+            ]}
+          />
+        </Stack>
       </Stack>
     </Box>
   );
+};
+
+TaskSelectField.propTypes = {
+  onChange: PropTypes.func,
+  label: PropTypes.string,
+  name: PropTypes.string,
+  disabled: PropTypes.bool,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    }).isRequired,
+  ),
 };
